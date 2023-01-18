@@ -10,10 +10,23 @@ class Home extends StatelessWidget {
       backgroundColor: tdBGColor,
       appBar: _buildAppBar(),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 15
+        ),
         child: Column(
           children: [
             searchBox(),
+             Expanded(
+              child:ListView(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 50, bottom: 20),
+                    child: Text('All Tasks', style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500),),
+                  )
+                ],
+              )
+             )
           ],
         )
       ),
