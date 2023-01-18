@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:todo_flutter_app/constants/colors.dart';
+import 'package:todo_flutter_app/models/todo.dart';
 
 class ToDoItem extends StatelessWidget {
-  const ToDoItem({Key? key}) : super(key: key);
+  final ToDo todo;
+  final onToDoChanged;
+  final onDeleteItem;
+
+  const ToDoItem({Key? key,
+    required this.todo,
+    required this.onToDoChanged,
+    required this.onDeleteItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +20,7 @@ class ToDoItem extends StatelessWidget {
       child: ListTile(
         onTap: () {
           print('I have been touched');
+          onToDoChanged(todo);
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -18,15 +28,15 @@ class ToDoItem extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         tileColor: Colors.white,
         leading: Icon(
-          Icons.check_box,
+          todo.isDone ? Icons.check_box : Icons.check_box_outline_blank,
           color: tdBlue,
         ),
         title: Text(
-          'Start a tech company',
+          todo.todoText!,
           style: TextStyle(
             fontSize: 16,
             color: tdBlack,
-            decoration: TextDecoration.lineThrough,
+            decoration: todo.isDone? TextDecoration.lineThrough : null,
           ),
         ),
         trailing: Container(
